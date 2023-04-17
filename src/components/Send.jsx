@@ -35,7 +35,7 @@ const Send = () => {
         value: web3.utils.toWei(amount, "ether"),
         gas: 24000,
       });
-      console.log(result);
+      console.log(result); //result contains all transaction's info, fetch this to create history
       setStatus(true);
     } catch (error) {
       console.error(error);

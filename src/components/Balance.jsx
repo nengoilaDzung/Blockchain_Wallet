@@ -25,7 +25,6 @@ const Balance = () => {
     }
   }, [address]);
   return (
-    
     <div>
       <h1>Check Ethereum Balance</h1>
       <label>

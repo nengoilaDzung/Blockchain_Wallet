@@ -8,7 +8,11 @@ import {
   Cryptocurrencies,
   News,
   Cryptodetails,
-  Send,Balance
+  Send,
+  Balance,
+  Register,
+  Auth,
+  Login,
 } from "./components";
 
 const App = () => {
@@ -33,13 +37,14 @@ const App = () => {
                 element={<Cryptodetails />}
               ></Route>
               <Route exact path="/news" element={<News />}></Route>
-              <Route exact path="/send" element={<Send/>}></Route>
-              <Route exact path="/balance" element={<Balance/>}></Route>
+              <Route exact path="/send" element={<Send />}></Route>
+              <Route exact path="/balance" element={<Balance />}></Route>
+              <Route exact path="/user/register" element={<Register />}></Route>
+              <Route exact path="/user/login" element={<Login />}></Route>
+              <Route exact path="/user" element={<Auth />}></Route>
             </Routes>
           </div>
         </Layout>
-
-        
       </div>
     </div>
   );

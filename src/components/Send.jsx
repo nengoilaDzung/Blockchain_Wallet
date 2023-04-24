@@ -1,36 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Web3 from "web3";
-
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const web3 = new Web3(
   "https://eth-sepolia.g.alchemy.com/v2/kscoUoRZN5FhliMzeir3e6gz7NdA3JgF"
 );
+
 const Send = () => {
-  const [senderAddress, setSenderAddress] = useState("");
+  const navigate = useNavigate();
+
   const [recipientAddress, setRecipientAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [privateKey, setPrivateKey] = useState("");
   const [status, setStatus] = useState(false);
+  const userD = JSON.parse(localStorage.getItem("userData"));
+  function nav() {
+    window.location.href = "/user/login";
+  }
+  if (localStorage.getItem("auth-token") == null) {
+    nav();
+  }
   const handleSendEther = async (event) => {
     event.preventDefault();
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts);
-    web3.eth.accounts.wallet.add(
-      "e3cda27e33de922cb2f2675b37587130876b8146ac36e815a201146a22df8e8f"
-    );
     try {
-      const sender = "0x4B1a3E22C7a5267A56a5912844A42f3dacECB2D4";
-
-      const balanceInWei = await web3.eth.getBalance(senderAddress);
+      const balanceInWei = await web3.eth.getBalance(userD.publicKey);
       const balanceInEth = web3.utils.fromWei(balanceInWei, "ether");
 
       if (Number(amount) > Number(balanceInEth)) {
+        alert(`Insufficient funds. Account balance is ${balanceInEth} ETH.`);
         throw new Error(
           `Insufficient funds. Account balance is ${balanceInEth} ETH.`
         );
       }
       web3.eth.accounts.wallet.add(privateKey);
       const result = await web3.eth.sendTransaction({
-        from: senderAddress,
+        from: userD.publicKey,
         to: recipientAddress,
         value: web3.utils.toWei(amount, "ether"),
         gas: 24000,
@@ -46,12 +50,8 @@ const Send = () => {
     <>
       <form onSubmit={handleSendEther}>
         <label>
-          Sender Address:
-          <input
-            type="text"
-            value={senderAddress}
-            onChange={(e) => setSenderAddress(e.target.value)}
-          />
+          Sender ID:{" "}
+          <span style={{ fontWeight: "bold" }}>{userD.publicKey}</span>
         </label>
         <br />
         <label>
@@ -72,7 +72,7 @@ const Send = () => {
           />
         </label>
         <label>
-          Private key:
+          Private key/Password:
           <input
             type="password"
             value={privateKey}
@@ -82,7 +82,7 @@ const Send = () => {
         <br />
         <button type="submit">Send Ether</button>
       </form>
-      {status ? (<div>Success</div>) : ('')}
+      {status ? <div>Success</div> : ""}
     </>
   );
 };

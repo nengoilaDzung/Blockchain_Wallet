@@ -9,6 +9,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState(false);
+  function nav() {
+    window.location.href = "/user/login";
+  }
   async function save(event) {
     event.preventDefault();
 
@@ -24,6 +27,8 @@ function Register() {
     }
     setEmail("");
     setPassword("");
+    setName("");
+    nav();
   }
 
   return (
@@ -31,7 +36,7 @@ function Register() {
       <div class="container mt-4">
         <div class="card">
           <h1>Account Registation</h1>
-
+          <span>Remember to save your address and private key!</span>
           <form>
             <div class="form-group">
               <label>Name</label>
@@ -55,48 +60,19 @@ function Register() {
               }}
             >
               Generate
-              
-              
             </button>
             <div>
-                {status ? (
+              {status ? (
                 <div>
                   <div>{email}</div> <div>{password}</div>
                 </div>
               ) : (
                 ""
               )}
-              </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                placeholder="Enter Email"
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-            </div>
-
-            <div class="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                placeholder="Enter Password"
-                value={password}
-                onChange={(event) => {
-                  setPassword(event.target.value);
-                }}
-              />
             </div>
 
             <button type="submit" class="btn btn-primary mt-4" onClick={save}>
-              Save
+              Register
             </button>
           </form>
         </div>

@@ -12,6 +12,7 @@ import {
   UserOutlined,
   ApiOutlined,
   PartitionOutlined,
+  DiffOutlined
 } from "@ant-design/icons";
 import icon from "../images/icon.png";
 import Auth from "./Auth";
@@ -106,11 +107,18 @@ const Navbar = () => {
           )}
 
           {notLogged ? (
-            <Menu.Item icon={<PartitionOutlined />}>
-              <Link className="signin" to="/user/login">
-                Sign In
-              </Link>
-            </Menu.Item>
+            <>
+              <Menu.Item icon={<PartitionOutlined />}>
+                <Link className="signin" to="/user/login">
+                  Sign In
+                </Link>
+              </Menu.Item>
+              <Menu.Item icon={<DiffOutlined />}>
+                <Link className="signin" to="/user/register">
+                  Sign Up
+                </Link>
+              </Menu.Item>
+            </>
           ) : (
             <Button type="button" className="signout" onClick={handleLogout}>
               <ApiOutlined /> Sign Out

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import '../styles/send.css'
+import "../styles/send.css";
 
 const web3 = new Web3(
-  "https://eth-sepolia.g.alchemy.com/v2/kscoUoRZN5FhliMzeir3e6gz7NdA3JgF"
+  "https://eth-sepolia.g.alchemy.com/v2/23WXDFCz8XmlDQpHHgMhs_d0N9zsXS7e"
 );
 const Send = () => {
   const navigate = useNavigate();
@@ -70,7 +70,9 @@ const Send = () => {
       const balanceInEth = web3.utils.fromWei(balanceInWei, "ether");
 
       if (Number(amount) > Number(balanceInEth)) {
-        setErrorContent(`Insufficient funds. Account balance is ${balanceInEth} ETH.`);
+        setErrorContent(
+          `Insufficient funds. Account balance is ${balanceInEth} ETH.`
+        );
         setStatus1(false);
         setStatus3(true);
       }
@@ -81,6 +83,7 @@ const Send = () => {
         value: web3.utils.toWei(amount, "ether"),
         gas: 24000,
       });
+      console.log(recipientAddress);
       console.log(result); //result contains all transaction's info, fetch this to create history
       closeModal1();
     } catch (error) {
@@ -96,40 +99,35 @@ const Send = () => {
         <h1>Send Crypto</h1>
         <form onSubmit={handleFormSubmit}>
           <div className="row">
-            <label>
-              Sender Address:
-            </label>
+            <label>Sender Address:</label>
             <span>{userD.publicKey}</span>
             <br />
           </div>
           <div className="row">
-            <label>
-              Recipient Address:
-            </label>
+            <label>Recipient Address:</label>
             <input
-              type="text" required
+              type="text"
+              required
               value={recipientAddress}
               onChange={(e) => setRecipientAddress(e.target.value)}
             />
             <br />
           </div>
           <div className="row">
-            <label>
-              Amount:
-            </label>
+            <label>Amount:</label>
             <input
-              type="text" required
+              type="text"
+              required
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
             />
             <br />
           </div>
           <div className="row">
-            <label>
-              Private key:
-            </label>
+            <label>Private key:</label>
             <input
-              type="password" required
+              type="password"
+              required
               value={privateKey}
               onChange={(e) => setPrivateKey(e.target.value)}
             />
@@ -143,9 +141,15 @@ const Send = () => {
         <div className="modal-container">
           <div className="modal">
             <h2>Confirm transaction</h2>
-            <p>Are you sure you want to send <b>{amount}</b> ETH?</p>
-            <button className="green-btn" onClick={handleSendEther}>Confirm</button>
-            <button className="red-btn" onClick={cancel}>Cancel</button>
+            <p>
+              Are you sure you want to send <b>{amount}</b> ETH?
+            </p>
+            <button className="green-btn" onClick={handleSendEther}>
+              Confirm
+            </button>
+            <button className="red-btn" onClick={cancel}>
+              Cancel
+            </button>
           </div>
         </div>
       ) : null}
@@ -153,16 +157,20 @@ const Send = () => {
         <div className="modal-container">
           <div className="modal">
             <h2>Crypto sent successfully!</h2>
-            <button className="green-btn" onClick={closeModal2}>OK</button>
+            <button className="green-btn" onClick={closeModal2}>
+              OK
+            </button>
           </div>
         </div>
       ) : null}
       {status3 ? (
         <div className="modal-container">
           <div className="modal">
-            <h2 style={{ color: 'red' }}>Error!</h2>
+            <h2 style={{ color: "red" }}>Error!</h2>
             <p>{errorContent}</p>
-            <button className="green-btn" onClick={closeModal3}>OK</button>
+            <button className="green-btn" onClick={closeModal3}>
+              OK
+            </button>
           </div>
         </div>
       ) : null}

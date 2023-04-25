@@ -406,5 +406,44 @@ a:hover {
 .viewhistory {
   font-weight: 700;
   font-size: 20px;
-  margin-left: 20px;
+}
+
+.balanceinauth {
+  color: black !important;
+}
+
+.history-section {
+  margin-left: 15px;
+}
+
+.transaction {
+  list-style: none;
+}
+
+.transaction th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04aa6d;
+  color: white;
+}
+
+.transaction-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.transaction-table td,
+.transaction-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-weight: 500;
+}
+
+.transaction-table tr:nth-child(even) {
+  background-color: #d5d5d5;
+}
+
+.transaction-table tr:hover {
+  background-color: #ddd;
 }

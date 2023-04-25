@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Col, Row, Typography, Select } from "antd";
 import { useNavigate } from "react-router-dom";
+import Balance from "./Balance";
+import History from "./History";
 const Auth = () => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +29,7 @@ const Auth = () => {
     };
 
     fetchUser();
+    
   }, []);
   if (isLoading) {
     return <div>Loading...</div>;
@@ -76,14 +79,10 @@ const Auth = () => {
           </Col>
           <Typography className="stats">{}</Typography>
         </Col>
-        <a
-          href={`https://sepolia.etherscan.io/address/${userD.publicKey}`}
-          target="_blank"
-          rel="noreferrer"
-          className="viewhistory"
-        >
-          View Transaction History Through Etherscan
-        </a>
+
+        <div className="history-section">
+          <History address={userD.publicKey} />
+        </div>
       </Col>
     </div>
   );

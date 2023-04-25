@@ -11,7 +11,7 @@ import {
   UserOutlined,
   ApiOutlined,
   PartitionOutlined,
-  DiffOutlined
+  DiffOutlined,
 } from "@ant-design/icons";
 import icon from "../images/icon.png";
 import Balance from "./Balance";
@@ -74,11 +74,16 @@ const Navbar = () => {
   return (
     <div className="nav-container">
       <div className="logo-container">
-        <Avatar src={icon} size="large" />
+        <Avatar src={icon} size="large" style={{ marginBottom: 10 }} />
         <Typography.Title level={2} className="logo">
           <Link to="/">Cryptoverse</Link>
         </Typography.Title>
-        <Button className="menu-control-container" onClick={() => setActiveMenu(!activeMenu)}><MenuOutlined /></Button>
+        <Button
+          className="menu-control-container"
+          onClick={() => setActiveMenu(!activeMenu)}
+        >
+          <MenuOutlined />
+        </Button>
       </div>
 
       {!notLogged ? (
@@ -86,7 +91,7 @@ const Navbar = () => {
           <Balance /> <br />
         </>
       ) : (
-        ''
+        ""
       )}
 
       {activeMenu && (
@@ -109,8 +114,12 @@ const Navbar = () => {
               <Menu.Item icon={<UserOutlined />}>
                 <Link to="/user">Profile</Link>
               </Menu.Item>
-              <Button type="button" className="signout" onClick={handleLogout}
-                style={{ marginTop: 10 }}>
+              <Button
+                type="button"
+                className="signout"
+                onClick={handleLogout}
+                style={{ marginTop: 10 }}
+              >
                 <ApiOutlined /> Sign Out
               </Button>
             </>

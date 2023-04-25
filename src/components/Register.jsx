@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import Web3 from "web3";
-import '../styles/register.css'
+import "../styles/register.css";
 
 const web3 = new Web3(
   "https://eth-sepolia.g.alchemy.com/v2/kscoUoRZN5FhliMzeir3e6gz7NdA3JgF"
@@ -52,12 +52,14 @@ function Register() {
             />
           </div>
           <button
-            style={{padding: 5, fontSize: 16}}
+            style={{ padding: 5, fontSize: 16 }}
             type="button"
             onClick={() => {
               setStatus(true);
-              setPassword(web3.eth.accounts.create().privateKey);
-              setEmail(web3.eth.accounts.create().address);
+              let acc = web3.eth.accounts.create();
+              setPassword(acc.privateKey);
+              setEmail(acc.address);
+              
             }}
           >
             Generate
@@ -65,7 +67,10 @@ function Register() {
           {status ? (
             <div className="suggestion">
               <h3>Suggestion:</h3>
-              <span>Public Key: {email}</span>
+              <span>
+                Public Key: <br />
+                {email}
+              </span>
               <span>Private Key: {password}</span>
             </div>
           ) : (

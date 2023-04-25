@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import { Link } from "react-router-dom";
 import { WalletOutlined } from "@ant-design/icons";
-import "../styles/balance.css"
+import "../styles/balance.css";
 
 const Balance = () => {
   // Setup
@@ -20,18 +20,21 @@ const Balance = () => {
       const balance = await web3.eth.getBalance(userD.publicKey);
       setBalance(balance);
       setIsLoading(false);
-    };
-
+    }
     fetchBalance();
   }, []);
-
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="balance">
-      <WalletOutlined style={{ color: 'white', fontSize: 20 }} />
+      <WalletOutlined style={{ color: "white", fontSize: 20 }} />
       {isLoading ? (
         <h1>Loading balance...</h1>
       ) : (
-        <h1>Balance: {parseFloat(web3.utils.fromWei(balance)).toFixed(4)} Eth</h1>
+        <h1>
+          Balance: {parseFloat(web3.utils.fromWei(balance)).toFixed(3)} Eth
+        </h1>
       )}
     </div>
   );

@@ -33,7 +33,7 @@ const Balance = () => {
         <h1>Loading balance...</h1>
       ) : (
         <h1>
-          Balance: {parseFloat(web3.utils.fromWei(balance)).toFixed(3)} Eth
+          Balance: {parseFloat(web3.utils.fromWei(balance)).toFixed(3)} ETH
         </h1>
       )}
     </div>

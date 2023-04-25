@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import Web3 from "web3";
+import '../styles/register.css'
+
 const web3 = new Web3(
   "https://eth-sepolia.g.alchemy.com/v2/kscoUoRZN5FhliMzeir3e6gz7NdA3JgF"
 );
@@ -32,50 +34,75 @@ function Register() {
   }
 
   return (
-    <div>
-      <div class="container mt-4">
-        <div class="card">
-          <h1>Account Registation</h1>
-          <span>Remember to save your address and private key!</span>
-          <form>
-            <div class="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="name"
-                placeholder="Enter Name"
-                value={name}
-                onChange={(event) => {
-                  setName(event.target.value);
-                }}
-              />
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                setStatus(true);
-                setPassword(web3.eth.accounts.create().privateKey);
-                setEmail(web3.eth.accounts.create().address);
+    <div className="register-page">
+      <div className="register-form">
+        <h1>Account Registation</h1>
+        <form>
+          <div className="row">
+            <label>Username: </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Enter Name"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
               }}
-            >
-              Generate
-            </button>
-            <div>
-              {status ? (
-                <div>
-                  <div>{email}</div> <div>{password}</div>
-                </div>
-              ) : (
-                ""
-              )}
+            />
+          </div>
+          <button
+            style={{padding: 5, fontSize: 16}}
+            type="button"
+            onClick={() => {
+              setStatus(true);
+              setPassword(web3.eth.accounts.create().privateKey);
+              setEmail(web3.eth.accounts.create().address);
+            }}
+          >
+            Generate
+          </button>
+          {status ? (
+            <div className="suggestion">
+              <h3>Suggestion:</h3>
+              <span>Public Key: {email}</span>
+              <span>Private Key: {password}</span>
             </div>
+          ) : (
+            ""
+          )}
+          <div className="row">
+            <label>Public Key:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
 
-            <button type="submit" class="btn btn-primary mt-4" onClick={save}>
-              Register
-            </button>
-          </form>
-        </div>
+          <div className="row">
+            <label>Password:</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </div>
+
+          <button type="submit" onClick={save}>
+            Register
+          </button>
+        </form>
       </div>
     </div>
   );

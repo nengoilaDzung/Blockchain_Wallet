@@ -391,12 +391,15 @@ a:hover {
 }
 
 .signout {
-  margin-left: 50px;
+  margin-left: 70px;
   background-color: red;
   color: white;
   border: none;
   padding-left: 20px;
   padding-right: 20px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 20px;
 }
 .signout:hover {
   color: black;

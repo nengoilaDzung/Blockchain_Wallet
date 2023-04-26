@@ -120,7 +120,7 @@ const Navbar = () => {
                 onClick={handleLogout}
                 style={{ marginTop: 10 }}
               >
-                <ApiOutlined /> Sign Out
+                <ApiOutlined /> SIGN OUT
               </Button>
             </>
           ) : (

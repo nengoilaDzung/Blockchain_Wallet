@@ -6,6 +6,16 @@ function History({ address }) {
   const web3 = new Web3(
     "https://eth-sepolia.g.alchemy.com/v2/kscoUoRZN5FhliMzeir3e6gz7NdA3JgF"
   );
+  function formatDate(timestamp) {
+    const date = new Date(timestamp * 1000);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
   useEffect(() => {
     async function fetchTxList() {
       const url = `http://api-sepolia.etherscan.io//api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=desc&apikey=51KNI8CZZWE793788X3XSNKH7CXIIF3N9Q`;
@@ -13,7 +23,6 @@ function History({ address }) {
       const data = await response.json();
       if (data.status === "1") {
         setTxList(data.result);
-        console.log(txList);
       } else {
         console.error("Error fetching transaction history");
       }
@@ -25,12 +34,13 @@ function History({ address }) {
   }
   return (
     <div>
-      <h2>Transaction History for {address}</h2>
+      <h1>Transaction History</h1>
       <a
         href={`https://sepolia.etherscan.io/address/${address}`}
         target="_blank"
         rel="noreferrer"
         className="viewhistory"
+        style={{fontSize:15}}
       >
         View More
       </a>
@@ -39,6 +49,7 @@ function History({ address }) {
           <tr>
             <th>From</th>
             <th>To</th>
+            <th>Time</th>
             <th>Type</th>
             <th>Value</th>
           </tr>
@@ -46,6 +57,7 @@ function History({ address }) {
             <tr key={tx.hash}>
               <td>{tx.from}</td>
               <td>{tx.to}</td>
+              <td>{formatDate(tx.timeStamp)}</td>
               <td>
                 {tx.from != address.toLowerCase() ? (
                   <span style={{ color: "green" }}>IN</span>

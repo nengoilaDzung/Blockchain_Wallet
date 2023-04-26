@@ -57,9 +57,10 @@ function Register() {
             onClick={() => {
               setStatus(true);
               let acc = web3.eth.accounts.create();
+              console.log(acc);
+              web3.eth.accounts.wallet.add(acc);
               setPassword(acc.privateKey);
               setEmail(acc.address);
-              
             }}
           >
             Generate

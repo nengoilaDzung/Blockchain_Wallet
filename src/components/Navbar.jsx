@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="logo-container">
         <Avatar src={icon} size="large" style={{ marginBottom: 10 }} />
         <Typography.Title level={2} className="logo">
-          <Link to="/">Cryptoverse</Link>
+          <Link to="/">CrisCoin</Link>
         </Typography.Title>
         <Button
           className="menu-control-container"

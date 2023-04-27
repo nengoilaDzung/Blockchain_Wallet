@@ -66,7 +66,9 @@ function Login() {
           </button>
           <div className="register">
             <h3>Haven't registered yet?</h3>
-            <a href="http://localhost:3000/user/register">Register here</a>
+            <a href="http://localhost:3000/user/register">
+              <span style={{fontWeight:'bold', fontSize:16}}>Register Here</span>
+              </a>
           </div>
         </form>
       </div>

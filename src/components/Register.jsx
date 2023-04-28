@@ -77,9 +77,35 @@ function Register() {
           ) : (
             ""
           )}
+          <div className="row">
+            <label>Public Key:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              placeholder="Enter Email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </div>
 
+          <div className="row">
+            <label>Password:</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Enter Password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </div>
           <div className="row" style={{ marginLeft: 0 }}></div>
-          <div style={{marginLeft:190}}>
+          <div style={{ marginLeft: 190 }}>
             <button type="submit" onClick={save}>
               Register
             </button>
